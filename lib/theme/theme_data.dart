@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/utils/colors.dart';
+import 'package:notes_sphere_v116/theme/colors.dart';
+import 'package:notes_sphere_v116/theme/text_theme.dart';
 
 class AppThemes {
   // Dark Theme
@@ -18,13 +19,7 @@ class AppThemes {
       backgroundColor: AppColorsDark.kFabColor,
     ),
     cardColor: AppColorsDark.kCardColor,
-    textTheme: TextTheme(
-      headlineSmall: TextStyle(color: AppColorsDark.kTextColor),
-      titleLarge: TextStyle(color: AppColorsDark.kTextColor),
-      titleMedium: TextStyle(color: AppColorsDark.kTextColor),
-      bodyLarge: TextStyle(color: AppColorsDark.kTextColor),
-      bodyMedium: TextStyle(color: AppColorsDark.kTextColor),
-    ),
+    textTheme: AppTextTheme.darkTextTheme,
   );
 
   // Light Theme
@@ -50,12 +45,6 @@ class AppThemes {
       foregroundColor: Colors.white,
     ),
     cardColor: AppColorsLight.kCardColor,
-    textTheme: TextTheme(
-      headlineSmall: TextStyle(color: AppColorsLight.kTextColor),
-      titleLarge: TextStyle(color: AppColorsLight.kTextColor),
-      titleMedium: TextStyle(color: AppColorsLight.kTextColor),
-      bodyLarge: TextStyle(color: AppColorsLight.kTextColor),
-      bodyMedium: TextStyle(color: AppColorsLight.kTextColor),
-    ),
+    textTheme: AppTextTheme.lightTextTheme,
   );
 }
