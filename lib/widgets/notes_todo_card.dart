@@ -20,7 +20,7 @@ class _NotesTodoCardState extends State<NotesTodoCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.42,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(kDefaultPadding),

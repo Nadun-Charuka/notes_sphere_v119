@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/providers/theme_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
+import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/notes_todo_card.dart';
 import 'package:notes_sphere_v116/widgets/progress_card.dart';
-import 'package:provider/provider.dart';
+import 'package:notes_sphere_v116/widgets/theme_icon_row_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -25,21 +23,12 @@ class _HomePageState extends State<HomePage> {
             style: Theme.of(context).textTheme.displayLarge,
           ),
         ),
-        actions: [
-          Switch(
-            value: themeProvider.themeMode ==
-                ThemeMode.dark, // Check if dark mode is enabled
-            onChanged: (value) {
-              themeProvider
-                  .toggleTheme(); // Toggle theme when switch is changed
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
+            ThemeIconRowWidget(),
             ProgressCard(
               completedTask: 3,
               totalTask: 10,
@@ -48,15 +37,25 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NotesTodoCard(
-                  title: "Notes",
-                  description: "3 Notes",
-                  icon: Icons.note,
+                GestureDetector(
+                  onTap: () {
+                    AppRouter.router.push("/notes");
+                  },
+                  child: NotesTodoCard(
+                    title: "Notes",
+                    description: "3 Notes",
+                    icon: Icons.note,
+                  ),
                 ),
-                NotesTodoCard(
-                  title: "To-Do List",
-                  description: "5 Tasks",
-                  icon: Icons.calendar_today,
+                GestureDetector(
+                  onTap: () {
+                    AppRouter.router.push("/todos");
+                  },
+                  child: NotesTodoCard(
+                    title: "To-Do List",
+                    description: "5 Tasks",
+                    icon: Icons.calendar_today,
+                  ),
                 )
               ],
             ),

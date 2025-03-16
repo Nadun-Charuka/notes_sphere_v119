@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-class ThemeProvider extends ChangeNotifier {
-  // Default theme mode is light
-  ThemeMode _themeMode = ThemeMode.light;
-
-  // Getter for theme mode
+class ThemeProvider with ChangeNotifier {
+  ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
 
-  // Toggle between light and dark theme
-  void toggleTheme() {
-    _themeMode =
-        (_themeMode == ThemeMode.light) ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners(); // Notify listeners that theme has changed
+  late final Box _box;
+  ThemeProvider() {
+    _initHive();
+  }
+
+  Future<void> _initHive() async {
+    _box = Hive.box('themeBox');
+    await _loadThemeMode();
+  }
+
+  /// Loads theme mode from Hive storage
+  Future<void> _loadThemeMode() async {
+    int? storedTheme = _box.get('themeMode'); // Get stored value
+    if (storedTheme != null) {
+      _themeMode =
+          ThemeMode.values[storedTheme]; // Convert integer to ThemeMode
+    }
+    notifyListeners();
+  }
+
+  /// Toggles theme and saves the preference
+  Future<void> toggleTheme(ThemeMode mode) async {
+    _themeMode = mode;
+    await _box.put(
+        'themeMode', mode.index); // Store theme as an integer (0, 1, 2)
+    notifyListeners();
   }
 }

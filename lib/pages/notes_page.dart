@@ -18,7 +18,11 @@ class _NotesPageState extends State<NotesPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: CircleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
         child: Icon(
           Icons.add,
           size: 40,

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_sphere_v116/providers/progress_provider.dart';
 import 'package:notes_sphere_v116/providers/theme_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/theme/theme_data.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  // Ensure proper initialization
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('themeBox');
+
   runApp(
     MultiProvider(
       providers: [
@@ -22,13 +28,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    return MaterialApp.router(
-      themeMode: themeProvider.themeMode,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) => MaterialApp.router(
+        themeMode: themeProvider.themeMode,
+        theme: AppThemes.lightTheme,
+        darkTheme: AppThemes.darkTheme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }
