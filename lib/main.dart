@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes_sphere_v116/models/note_model.dart';
+import 'package:notes_sphere_v116/models/todo_model.dart';
 import 'package:notes_sphere_v116/providers/progress_provider.dart';
 import 'package:notes_sphere_v116/providers/theme_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
@@ -9,8 +11,17 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   // Ensure proper initialization
   WidgetsFlutterBinding.ensureInitialized();
+  //initialized hive for flutter
   await Hive.initFlutter();
   await Hive.openBox('themeBox');
+
+  //register adapter
+  Hive.registerAdapter(NoteModelAdapter());
+  Hive.registerAdapter(TodoModelAdapter());
+
+  //open hive boxes
+  await Hive.openBox('notes');
+  await Hive.openBox('todos');
 
   runApp(
     MultiProvider(
