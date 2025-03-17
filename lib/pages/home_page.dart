@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             ThemeIconRowWidget(),
             ProgressCard(
-              completedTask: 3,
+              completedTask: 9,
               totalTask: 10,
             ),
             kVerticalSpace20,

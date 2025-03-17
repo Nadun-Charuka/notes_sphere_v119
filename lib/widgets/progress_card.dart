@@ -56,6 +56,13 @@ class ProgressCard extends StatelessWidget {
                 return SimpleCircularProgressBar(
                   valueNotifier: progressProvider.progressNotifier,
                   progressStrokeWidth: 10,
+                  progressColors: [
+                    Colors.purpleAccent, // 0% - Starting (Futuristic vibe)
+                    Colors.blueAccent, // 25% - Progressing
+                    Colors.cyanAccent, // 50% - Halfway done
+                    Colors.tealAccent, // 75% - Almost complete
+                    Colors.greenAccent, // 100% - Completed
+                  ],
                   mergeMode: true,
                   onGetText: (double value) {
                     return Text(

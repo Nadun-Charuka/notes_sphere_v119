@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes_sphere_v116/models/note_model.dart';
 import 'package:notes_sphere_v116/services/note_services.dart';
+import 'package:notes_sphere_v116/utils/constants.dart';
+import 'package:notes_sphere_v116/widgets/notes_card.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -65,6 +67,37 @@ class _NotesPageState extends State<NotesPage> {
           color: Theme.of(context).colorScheme.primary,
         ),
         onPressed: () {},
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: Column(
+          children: [
+            allNotes.isEmpty
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height * .05,
+                    child: Text(
+                        "No notes are available , click the + button to add new note"),
+                  )
+                : GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: kDefaultPadding,
+                      mainAxisSpacing: kDefaultPadding,
+                      childAspectRatio: 6 / 4,
+                    ),
+                    itemCount: notesWithCategory.length,
+                    itemBuilder: (contex, index) {
+                      return NotesCard(
+                        noteCategory: notesWithCategory.keys.elementAt(index),
+                        noOfNotes:
+                            notesWithCategory.values.elementAt(index).length,
+                      );
+                    },
+                  )
+          ],
+        ),
       ),
     );
   }
