@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/models/note_model.dart';
 import 'package:provider/provider.dart';
 

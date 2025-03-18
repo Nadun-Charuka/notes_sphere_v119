@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
-import 'package:notes_sphere_v116/widgets/edit_note_dialog.dart';
+import 'package:notes_sphere_v116/widgets/note_dialog/edit_note_dialog.dart';
 import 'package:provider/provider.dart';
 
 class CategoriedNoteCard extends StatefulWidget {
