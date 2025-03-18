@@ -8,13 +8,13 @@ class NoteModel {
   @HiveField(0)
   final String id;
   @HiveField(1)
-  final String title;
+  late final String title;
   @HiveField(2)
-  final String category;
+  late final String category;
   @HiveField(3)
-  final String content;
+  late final String content;
   @HiveField(4)
-  final DateTime date;
+  late final DateTime date;
 
   NoteModel({
     String? id,

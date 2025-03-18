@@ -1,53 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/models/note_model.dart';
-import 'package:notes_sphere_v116/services/note_services.dart';
-import 'package:notes_sphere_v116/utils/constants.dart';
+import 'package:notes_sphere_v116/pages/categorized_note_page.dart';
+import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/utils/router.dart';
+import 'package:notes_sphere_v116/widgets/add_note_dialog.dart';
 import 'package:notes_sphere_v116/widgets/notes_card.dart';
+import 'package:notes_sphere_v116/utils/constants.dart';
+import 'package:provider/provider.dart';
 
-class NotesPage extends StatefulWidget {
+class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
 
   @override
-  State<NotesPage> createState() => _NotesPageState();
-}
-
-class _NotesPageState extends State<NotesPage> {
-  final NoteService noteService = NoteService();
-  List<NoteModel> allNotes = [];
-  Map<String, List<NoteModel>> notesWithCategory = {};
-
-  @override
-  void initState() {
-    super.initState();
-    _checkAndCreateData();
-  }
-
-  //check weather the user is new
-  void _checkAndCreateData() async {
-    final bool isNewUser = await noteService.isNewUser();
-    debugPrint("$isNewUser");
-    // if the user is new create the inital notes
-    if (isNewUser) {
-      await noteService.createInitialNotes();
-    }
-    _loadNotes();
-  }
-
-  //load the notes
-  Future<void> _loadNotes() async {
-    final List<NoteModel> loadedNotes = await noteService.loadNotes();
-    final Map<String, List<NoteModel>> notesByCategory =
-        noteService.getNotesByCategoryMap(loadedNotes);
-    setState(() {
-      allNotes = loadedNotes;
-      notesWithCategory = notesByCategory;
-      debugPrint("$notesWithCategory");
-      debugPrint("${allNotes.length}");
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final noteProvider = Provider.of<NoteProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -66,17 +32,22 @@ class _NotesPageState extends State<NotesPage> {
           size: 40,
           color: Theme.of(context).colorScheme.primary,
         ),
-        onPressed: () {},
+        onPressed: () {
+          // Show dialog to add a new note
+          showDialog(
+            context: context,
+            builder: (context) => AddNoteDialog(),
+          );
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
-            allNotes.isEmpty
+            noteProvider.allNotes.isEmpty
                 ? SizedBox(
                     height: MediaQuery.of(context).size.height * .05,
-                    child: Text(
-                        "No notes are available , click the + button to add new note"),
+                    child: Text("No notes available, click + to add new note"),
                   )
                 : GridView.builder(
                     shrinkWrap: true,
@@ -87,15 +58,23 @@ class _NotesPageState extends State<NotesPage> {
                       mainAxisSpacing: kDefaultPadding,
                       childAspectRatio: 6 / 4,
                     ),
-                    itemCount: notesWithCategory.length,
-                    itemBuilder: (contex, index) {
-                      return NotesCard(
-                        noteCategory: notesWithCategory.keys.elementAt(index),
-                        noOfNotes:
-                            notesWithCategory.values.elementAt(index).length,
+                    itemCount: noteProvider.notesByCategory.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        child: NotesCard(
+                          noteCategory: noteProvider.notesByCategory.keys
+                              .elementAt(index),
+                          noOfNotes: noteProvider.notesByCategory.values
+                              .elementAt(index)
+                              .length,
+                        ),
+                        onTap: () {
+                          AppRouter.router.push(
+                              "/categorizedNotePage/${noteProvider.notesByCategory.keys.elementAt(index)}");
+                        },
                       );
                     },
-                  )
+                  ),
           ],
         ),
       ),

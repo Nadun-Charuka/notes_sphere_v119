@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_sphere_v116/models/note_model.dart';
 import 'package:notes_sphere_v116/models/todo_model.dart';
+import 'package:notes_sphere_v116/providers/note_provider.dart';
 import 'package:notes_sphere_v116/providers/progress_provider.dart';
 import 'package:notes_sphere_v116/providers/theme_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
@@ -28,6 +29,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => ProgressProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => NoteProvider()),
       ],
       child: const MyApp(),
     ),

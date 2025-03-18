@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:notes_sphere_v116/providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
+import 'package:provider/provider.dart';
 
-class NotesTodoCard extends StatefulWidget {
+class CategoriedNoteCard extends StatefulWidget {
   final String title;
-  final String totalItems;
-  final IconData icon;
-  const NotesTodoCard({
+  final String id;
+  final String content;
+
+  const CategoriedNoteCard({
     super.key,
     required this.title,
-    required this.totalItems,
-    required this.icon,
+    required this.content,
+    required this.id,
   });
 
   @override
-  State<NotesTodoCard> createState() => _NotesTodoCardState();
+  State<CategoriedNoteCard> createState() => _CategoriedNoteCardState();
 }
 
-class _NotesTodoCardState extends State<NotesTodoCard> {
+class _CategoriedNoteCardState extends State<CategoriedNoteCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.42,
+      height: 550,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(kDefaultPadding),
@@ -32,9 +36,21 @@ class _NotesTodoCardState extends State<NotesTodoCard> {
         ),
         child: Column(
           children: [
-            Icon(
-              widget.icon,
-              size: 40,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.edit),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Provider.of<NoteProvider>(context, listen: false)
+                        .deleteNote(widget.id);
+                  },
+                  icon: Icon(Icons.delete),
+                ),
+              ],
             ),
             kVerticalSpace10,
             Text(
@@ -43,7 +59,7 @@ class _NotesTodoCardState extends State<NotesTodoCard> {
             ),
             kVerticalSpace10,
             Text(
-              widget.totalItems,
+              widget.content,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes_sphere_v116/pages/categorized_note_page.dart';
 import 'package:notes_sphere_v116/pages/home_page.dart';
 import 'package:notes_sphere_v116/pages/notes_page.dart';
 import 'package:notes_sphere_v116/pages/todo_page.dart';
@@ -29,6 +30,16 @@ class AppRouter {
         path: "/todos",
         builder: (context, state) {
           return TodoPage();
+        },
+      ),
+      GoRoute(
+        name: "categorizedNotePage",
+        path: "/categorizedNotePage/:category",
+        builder: (context, state) {
+          final category = state.pathParameters['category']!;
+          return CategorizedNotePage(
+            category: category,
+          );
         },
       )
     ],

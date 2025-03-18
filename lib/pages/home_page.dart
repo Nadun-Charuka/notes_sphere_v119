@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:notes_sphere_v116/providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/notes_todo_card.dart';
 import 'package:notes_sphere_v116/widgets/progress_card.dart';
 import 'package:notes_sphere_v116/widgets/theme_icon_row_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,10 +43,14 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     AppRouter.router.push("/notes");
                   },
-                  child: NotesTodoCard(
-                    title: "Notes",
-                    description: "3 Notes",
-                    icon: Icons.note,
+                  child: Selector<NoteProvider, int>(
+                    selector: (index, noteProvider) =>
+                        noteProvider.allNotes.length,
+                    builder: (context, allNotesLength, child) => NotesTodoCard(
+                      title: "Notes",
+                      totalItems: "$allNotesLength Notes",
+                      icon: Icons.note,
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -53,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: NotesTodoCard(
                     title: "To-Do List",
-                    description: "5 Tasks",
+                    totalItems: "5 Tasks",
                     icon: Icons.calendar_today,
                   ),
                 )
