@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/pages/categorized_note_page.dart';
 import 'package:notes_sphere_v116/providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/add_note_dialog.dart';
 import 'package:notes_sphere_v116/widgets/notes_card.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
@@ -36,7 +36,9 @@ class NotesPage extends StatelessWidget {
           // Show dialog to add a new note
           showDialog(
             context: context,
-            builder: (context) => AddNoteDialog(),
+            builder: (context) => AddNoteDialog(
+              id: Uuid().v4(),
+            ),
           );
         },
       ),

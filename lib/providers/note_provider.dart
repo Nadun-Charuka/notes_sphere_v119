@@ -72,16 +72,35 @@ class NoteProvider extends ChangeNotifier {
     return notesByCategory;
   }
 
-  // Add a new note
-  Future<void> addNote(String title, String category, String content) async {
-    final newNote = NoteModel(
-      id: Uuid().v4(),
-      title: title,
-      category: category,
-      content: content,
-      date: DateTime.now(),
-    );
-    _allNotes.add(newNote);
+  Future<void> addNote(
+      String? id, String title, String category, String content) async {
+    // Check if the note already exists by its ID
+    final index = _allNotes.indexWhere((note) => note.id == id);
+
+    if (index != -1) {
+      // If note exists, update it
+      _allNotes[index] = NoteModel(
+        id: id, // Keep the existing id
+        title: title,
+        category: category,
+        content: content,
+        date: DateTime.now(), // Update the date or keep it as is
+      );
+      debugPrint("Updated existing note");
+    } else {
+      // If note does not exist, add a new one
+      final newNote = NoteModel(
+        id: Uuid().v4(),
+        title: title,
+        category: category,
+        content: content,
+        date: DateTime.now(),
+      );
+      _allNotes.add(newNote);
+      debugPrint("Added new note");
+    }
+
+    // Save to Hive and notify listeners
     await _noteBox.put("notes", _allNotes);
     notifyListeners();
   }
