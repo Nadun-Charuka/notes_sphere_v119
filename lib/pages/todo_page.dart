@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_sphere_v116/widgets/todo_dialog/add_todo_dialog.dart';
-import 'package:notes_sphere_v116/widgets/todo_task_list.dart';
+import 'package:notes_sphere_v116/widgets/todo_cards/todo_task_list.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});

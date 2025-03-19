@@ -28,9 +28,17 @@ class TodoProvider extends ChangeNotifier {
     ),
   ];
 
-  void toggleTaskStatus(int index) {
-    tasks[index].isCompleted = !tasks[index].isCompleted;
-    notifyListeners();
+  void toggleTaskStatus(Task task) {
+    int index =
+        tasks.indexOf(task); // 🔹 Find the correct index in the full list
+    if (index != -1) {
+      tasks[index] = Task(
+        title: tasks[index].title,
+        dateTime: tasks[index].dateTime,
+        isCompleted: !tasks[index].isCompleted, // Toggle status
+      );
+      notifyListeners();
+    }
   }
 
   void addTask({
@@ -38,10 +46,12 @@ class TodoProvider extends ChangeNotifier {
     required DateTime date,
   }) {
     Task task = Task(
+      isCompleted: false,
       title: title,
       dateTime: date,
     );
     tasks.add(task);
+    notifyListeners();
   }
 
   List<Task> get pendingTasks => tasks.where((t) => !t.isCompleted).toList();

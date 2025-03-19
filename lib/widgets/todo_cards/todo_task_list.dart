@@ -28,7 +28,9 @@ class TaskList extends StatelessWidget {
                     color: isCompleted ? Colors.red : Colors.green,
                   ),
                   onPressed: () {
-                    taskProvider.toggleTaskStatus(index);
+                    taskProvider.toggleTaskStatus(tasks[index]);
+
+                    debugPrint("");
                   },
                 ),
               ),
