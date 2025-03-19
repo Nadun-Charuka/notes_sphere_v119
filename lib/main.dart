@@ -5,6 +5,7 @@ import 'package:notes_sphere_v116/models/todo_model.dart';
 import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/providers/todo_providers/progress_provider.dart';
 import 'package:notes_sphere_v116/providers/theme_provider.dart';
+import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/theme/theme_data.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => ProgressProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => NoteProvider()),
+        ChangeNotifierProvider(create: (_) => TodoProvider()),
       ],
       child: const MyApp(),
     ),

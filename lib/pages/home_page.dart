@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, allNotesLength, child) => NotesTodoCard(
                       title: "Notes",
                       totalItems: "$allNotesLength Notes",
-                      icon: Icons.note,
+                      icon: Icons.note_outlined,
                     ),
                   ),
                 ),
