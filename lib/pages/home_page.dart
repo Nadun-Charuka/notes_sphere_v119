@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
-import 'package:notes_sphere_v116/widgets/notes_todo_card.dart';
+import 'package:notes_sphere_v116/widgets/note_cards/notes_todo_card.dart';
 import 'package:notes_sphere_v116/widgets/progress_card.dart';
-import 'package:notes_sphere_v116/widgets/theme_icon_row_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,18 +18,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
+        leading: Text(""),
         title: Center(
-          child: Text(
-            "NoteSphere",
-            style: Theme.of(context).textTheme.displayLarge,
+          child: Text.rich(
+            TextSpan(
+              text: "LecKeeper",
+              style: Theme.of(context).textTheme.displayLarge,
+              children: [
+                TextSpan(
+                  text: "\nStudy Smart, Stay Organized",
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+              ],
+            ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  AppRouter.router.push("/profile");
+                },
+                icon: Icon(
+                  Icons.account_circle_sharp,
+                  size: 40,
+                )),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
-            ThemeIconRowWidget(),
             ProgressCard(
               completedTask: 9,
               totalTask: 10,

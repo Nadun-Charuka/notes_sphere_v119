@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
-import 'package:notes_sphere_v116/providers/progress_provider.dart';
+import 'package:notes_sphere_v116/providers/todo_providers/progress_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
@@ -33,6 +33,7 @@ class ProgressCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,9 +45,39 @@ class ProgressCard extends StatelessWidget {
                 kVerticalSpace10,
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
-                  child: Text(
-                    "You have completed $completedTask out of $totalTask tasks,\nkeep up the progress.",
-                    style: Theme.of(context).textTheme.titleMedium,
+                  child: Text.rich(
+                    TextSpan(
+                      style: Theme.of(context).textTheme.titleLarge,
+                      children: [
+                        TextSpan(
+                          text: "You have completed",
+                        ),
+                        TextSpan(
+                          text: "\n $completedTask",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w800,
+                              ),
+                        ),
+                        TextSpan(
+                          text: " out of ",
+                        ),
+                        TextSpan(
+                          text: "$totalTask",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w800,
+                              ),
+                        ),
+                        TextSpan(
+                          text: " tasks,\nkeep up the progress.",
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notes_sphere_v116/pages/categorized_note_page.dart';
 import 'package:notes_sphere_v116/pages/home_page.dart';
 import 'package:notes_sphere_v116/pages/notes_page.dart';
+import 'package:notes_sphere_v116/pages/profile_page.dart';
 import 'package:notes_sphere_v116/pages/todo_page.dart';
 
 class AppRouter {
@@ -41,7 +42,14 @@ class AppRouter {
             category: category,
           );
         },
-      )
+      ),
+      GoRoute(
+        name: "profile",
+        path: "/profile",
+        builder: (context, index) {
+          return ProfilePage();
+        },
+      ),
     ],
   );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
-import 'package:notes_sphere_v116/widgets/categorized_note_card.dart';
+import 'package:notes_sphere_v116/widgets/note_cards/categorized_note_card.dart';
 import 'package:provider/provider.dart';
 
 class CategorizedNotePage extends StatelessWidget {

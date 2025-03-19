@@ -10,7 +10,7 @@ class ThemeIconRowWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeMode selectedTheme = themeProvider.themeMode;
 
-    return Card(
+    return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

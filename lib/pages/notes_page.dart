@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes_sphere_v116/providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
-import 'package:notes_sphere_v116/widgets/add_note_dialog.dart';
-import 'package:notes_sphere_v116/widgets/notes_card.dart';
+import 'package:notes_sphere_v116/widgets/note_dialog/add_note_dialog.dart';
+import 'package:notes_sphere_v116/widgets/note_cards/notes_card.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -44,40 +44,43 @@ class NotesPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
-        child: Column(
-          children: [
-            noteProvider.allNotes.isEmpty
-                ? SizedBox(
-                    height: MediaQuery.of(context).size.height * .05,
-                    child: Text("No notes available, click + to add new note"),
-                  )
-                : GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: kDefaultPadding,
-                      mainAxisSpacing: kDefaultPadding,
-                      childAspectRatio: 6 / 4,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              noteProvider.allNotes.isEmpty
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height * .05,
+                      child:
+                          Text("No notes available, click + to add new note"),
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: kDefaultPadding,
+                        mainAxisSpacing: kDefaultPadding,
+                        childAspectRatio: 6 / 4,
+                      ),
+                      itemCount: noteProvider.notesByCategory.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: NotesCard(
+                            noteCategory: noteProvider.notesByCategory.keys
+                                .elementAt(index),
+                            noOfNotes: noteProvider.notesByCategory.values
+                                .elementAt(index)
+                                .length,
+                          ),
+                          onTap: () {
+                            AppRouter.router.push(
+                                "/categorizedNotePage/${noteProvider.notesByCategory.keys.elementAt(index)}");
+                          },
+                        );
+                      },
                     ),
-                    itemCount: noteProvider.notesByCategory.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        child: NotesCard(
-                          noteCategory: noteProvider.notesByCategory.keys
-                              .elementAt(index),
-                          noOfNotes: noteProvider.notesByCategory.values
-                              .elementAt(index)
-                              .length,
-                        ),
-                        onTap: () {
-                          AppRouter.router.push(
-                              "/categorizedNotePage/${noteProvider.notesByCategory.keys.elementAt(index)}");
-                        },
-                      );
-                    },
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );

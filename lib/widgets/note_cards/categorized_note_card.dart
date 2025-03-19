@@ -46,7 +46,7 @@ class _CategoriedNoteCardState extends State<CategoriedNoteCard> {
                         style: Theme.of(context).textTheme.headlineLarge),
                     SizedBox(height: 10),
                     Text(widget.content,
-                        style: Theme.of(context).textTheme.bodyLarge),
+                        style: Theme.of(context).textTheme.titleLarge),
                     SizedBox(height: 10),
                     Text(
                         "Date: ${DateFormat("dd-MM-yyyy").format(widget.dateTime)}",

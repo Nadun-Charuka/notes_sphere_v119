@@ -23,12 +23,15 @@ class AddNoteDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+              style: Theme.of(context).textTheme.headlineSmall,
               controller: titleController,
               decoration: InputDecoration(labelText: "Title")),
           TextField(
+              style: Theme.of(context).textTheme.headlineLarge,
               controller: categoryController,
               decoration: InputDecoration(labelText: "Category")),
           TextField(
+              style: Theme.of(context).textTheme.titleLarge,
               controller: contentController,
               decoration: InputDecoration(labelText: "Content")),
         ],

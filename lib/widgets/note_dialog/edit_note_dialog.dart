@@ -30,14 +30,17 @@ class EditNoteDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            style: Theme.of(context).textTheme.headlineSmall,
             controller: titleController,
             decoration: const InputDecoration(labelText: "Title"),
           ),
           TextField(
+            style: Theme.of(context).textTheme.headlineLarge,
             controller: categoryController,
             decoration: const InputDecoration(labelText: "Category"),
           ),
           TextField(
+            style: Theme.of(context).textTheme.titleLarge,
             controller: contentController,
             decoration: const InputDecoration(labelText: "Content"),
           ),
