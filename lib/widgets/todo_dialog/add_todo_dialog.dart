@@ -3,6 +3,8 @@ import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddToDoDialog extends StatefulWidget {
+  const AddToDoDialog({super.key});
+
   @override
   State<AddToDoDialog> createState() => _AddToDoDialogState();
 }
@@ -19,22 +21,23 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
       lastDate: DateTime(2100),
     );
     if (pickedDate == null) return;
-
-    TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (pickedTime == null) return;
-
-    setState(() {
-      _selectedDateTime = DateTime(
-        pickedDate.year,
-        pickedDate.month,
-        pickedDate.day,
-        pickedTime.hour,
-        pickedTime.minute,
+    if (mounted) {
+      TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
       );
-    });
+      if (pickedTime == null) return;
+
+      setState(() {
+        _selectedDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+      });
+    }
   }
 
   void _addTask() {
@@ -61,6 +64,7 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            style: Theme.of(context).textTheme.headlineLarge,
             controller: _titleController,
             decoration: InputDecoration(labelText: "Task"),
           ),
@@ -70,6 +74,7 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
               labelText: _selectedDateTime == null
                   ? "Select Date & Time"
                   : "${_selectedDateTime!.toLocal()}".split('.')[0],
+              labelStyle: Theme.of(context).textTheme.titleLarge,
               suffixIcon: Icon(Icons.calendar_today),
               border: OutlineInputBorder(),
             ),
@@ -80,8 +85,13 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
       ),
       actions: [
         TextButton(
-            onPressed: () => Navigator.pop(context), child: Text("Cancel")),
-        TextButton(onPressed: _addTask, child: Text("Add")),
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: _addTask,
+          child: Text("Add"),
+        ),
       ],
     );
   }

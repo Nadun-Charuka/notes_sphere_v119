@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/providers/todo_providers/progress_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 class ProgressCard extends StatelessWidget {
-  final int completedTask;
-  final int totalTask;
-
   const ProgressCard({
     super.key,
-    required this.completedTask,
-    required this.totalTask,
   });
 
   @override
   Widget build(BuildContext context) {
+    int completedTask =
+        Provider.of<TodoProvider>(context, listen: false).completedTasks.length;
+    int totalTask =
+        Provider.of<TodoProvider>(context, listen: false).tasks.length;
+
     final progressProvider =
         Provider.of<ProgressProvider>(context, listen: false);
 
@@ -86,6 +87,7 @@ class ProgressCard extends StatelessWidget {
               builder: (context, progressProvider, child) {
                 return SimpleCircularProgressBar(
                   valueNotifier: progressProvider.progressNotifier,
+                  animationDuration: 1,
                   progressStrokeWidth: 10,
                   progressColors: [
                     Colors.purpleAccent, // 0% - Starting (Futuristic vibe)

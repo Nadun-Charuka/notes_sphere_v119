@@ -52,10 +52,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
-            ProgressCard(
-              completedTask: 9,
-              totalTask: 10,
-            ),
+            ProgressCard(),
             kVerticalSpace20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
+import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class TaskList extends StatelessWidget {
@@ -18,20 +20,36 @@ class TaskList extends StatelessWidget {
         return ListView.builder(
           itemCount: tasks.length,
           itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text(tasks[index].title),
-                subtitle: Text(tasks[index].dateTime.toString()),
-                trailing: IconButton(
-                  icon: Icon(
-                    isCompleted ? Icons.replay : Icons.check_box_outline_blank,
-                    color: isCompleted ? Colors.red : Colors.green,
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+                vertical: 5,
+              ),
+              child: Card(
+                child: ListTile(
+                  title: Text(
+                    tasks[index].title,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  onPressed: () {
-                    taskProvider.toggleTaskStatus(tasks[index]);
+                  subtitle: Text(
+                    DateFormat("dd-MM-yyyy 'at' HH:mm")
+                        .format(tasks[index].dateTime)
+                        .toString(),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      isCompleted
+                          ? Icons.replay
+                          : Icons.check_box_outline_blank,
+                      color: isCompleted ? Colors.red : Colors.green,
+                    ),
+                    onPressed: () {
+                      taskProvider.toggleTaskStatus(tasks[index]);
 
-                    debugPrint("");
-                  },
+                      debugPrint("");
+                    },
+                  ),
                 ),
               ),
             );
