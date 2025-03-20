@@ -45,11 +45,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) => MaterialApp.router(
+    return Consumer2<ThemeProvider, FontProvider>(
+      builder: (context, themeProvider, fontProvider, child) =>
+          MaterialApp.router(
         themeMode: themeProvider.themeMode,
-        theme: AppThemes.lightTheme,
-        darkTheme: AppThemes.darkTheme,
+        theme: AppThemes.lightTheme(context),
+        darkTheme: AppThemes.darkTheme(context),
         debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
       ),

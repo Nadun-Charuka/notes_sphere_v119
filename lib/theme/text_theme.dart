@@ -1,103 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:notes_sphere_v116/providers/font_provider.dart';
 import 'package:notes_sphere_v116/theme/colors.dart';
+import 'package:provider/provider.dart';
 
 class AppTextTheme {
-  static TextTheme _getTextTheme(Color color) {
-    final TextStyle font = GoogleFonts.caveat();
+  static TextTheme _getTextTheme(Color color, BuildContext context) {
+    final fontProvider = Provider.of<FontProvider>(context, listen: false);
+    final TextStyle baseStyle = TextStyle(color: color);
+
     return TextTheme(
-      displayLarge: font.copyWith(
-        fontSize: 57,
-        fontWeight: FontWeight.bold,
-        letterSpacing: -1.5,
-        color: color,
-      ),
-      displayMedium: font.copyWith(
-        fontSize: 45,
-        fontWeight: FontWeight.bold,
-        letterSpacing: -0.5,
-        color: color,
-      ),
-      displaySmall: font.copyWith(
-        fontSize: 36,
-        fontWeight: FontWeight.w600,
-        color: color,
-      ),
-      headlineLarge: font.copyWith(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: color,
-      ),
-      headlineMedium: font.copyWith(
-        fontSize: 28,
-        fontWeight: FontWeight.w600,
-        color: color,
-      ),
-      headlineSmall: font.copyWith(
-        fontSize: 24,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
-      titleLarge: font.copyWith(
-        fontSize: 22,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
-      titleMedium: font.copyWith(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
-      titleSmall: font.copyWith(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
-      bodyLarge: font.copyWith(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        letterSpacing: 0.5,
-        height: 1.5,
-        color: color,
-      ),
-      bodyMedium: font.copyWith(
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-        letterSpacing: 0.25,
-        height: 1.4,
-        color: color,
-      ),
-      bodySmall: font.copyWith(
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        letterSpacing: 0.4,
-        height: 1.4,
-        color: color.withValues(alpha: 0.7),
-      ),
-      labelLarge: font.copyWith(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 1.25,
-        color: color,
-      ),
-      labelMedium: font.copyWith(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 1,
-        color: color,
-      ),
-      labelSmall: font.copyWith(
-        fontSize: 10,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1,
-        color: color.withValues(alpha: 0.7),
-      ),
+      displayLarge: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 57,
+            fontWeight: FontWeight.bold,
+            letterSpacing: -1.5,
+          )),
+      displayMedium: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 45,
+            fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
+          )),
+      displaySmall: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 36,
+            fontWeight: FontWeight.w600,
+          )),
+      headlineLarge: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          )),
+      headlineMedium: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+          )),
+      headlineSmall: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+          )),
+      titleLarge: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+          )),
+      titleMedium: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          )),
+      titleSmall: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          )),
+      bodyLarge: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            letterSpacing: 0.5,
+            height: 1.5,
+          )),
+      bodyMedium: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            letterSpacing: 0.25,
+            height: 1.4,
+          )),
+      bodySmall: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            letterSpacing: 0.4,
+            height: 1.4,
+          )),
+      labelLarge: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.25,
+          )),
+      labelMedium: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1,
+          )),
+      labelSmall: fontProvider.getTextStyle(
+          color,
+          baseStyle.copyWith(
+            fontSize: 10,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 1,
+          )),
     );
   }
 
   // Dark Theme
-  static TextTheme darkTextTheme = _getTextTheme(AppColorsDark.kTextColor);
+  static TextTheme darkTextTheme(BuildContext context) =>
+      _getTextTheme(AppColorsDark.kTextColor, context);
 
   // Light Theme
-  static TextTheme lightTextTheme = _getTextTheme(AppColorsLight.kTextColor);
+  static TextTheme lightTextTheme(BuildContext context) =>
+      _getTextTheme(AppColorsLight.kTextColor, context);
 }
