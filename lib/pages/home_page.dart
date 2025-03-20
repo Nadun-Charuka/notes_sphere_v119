@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           child: Text.rich(
             TextSpan(
               text: "LecKeeper",
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context).textTheme.displayMedium,
               children: [
                 TextSpan(
                   text: "\nStudy Smart, Stay Organized",

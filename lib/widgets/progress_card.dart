@@ -48,7 +48,7 @@ class ProgressCard extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text.rich(
                     TextSpan(
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: [
                         TextSpan(
                           text: "You have completed",

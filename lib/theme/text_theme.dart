@@ -3,90 +3,90 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_sphere_v116/theme/colors.dart';
 
 class AppTextTheme {
-  // Common Font Style using Caveat font
   static TextTheme _getTextTheme(Color color) {
+    final TextStyle font = GoogleFonts.caveat();
     return TextTheme(
-      displayLarge: GoogleFonts.caveat(
+      displayLarge: font.copyWith(
         fontSize: 57,
         fontWeight: FontWeight.bold,
         letterSpacing: -1.5,
         color: color,
       ),
-      displayMedium: GoogleFonts.caveat(
+      displayMedium: font.copyWith(
         fontSize: 45,
         fontWeight: FontWeight.bold,
         letterSpacing: -0.5,
         color: color,
       ),
-      displaySmall: GoogleFonts.caveat(
+      displaySmall: font.copyWith(
         fontSize: 36,
         fontWeight: FontWeight.w600,
         color: color,
       ),
-      headlineLarge: GoogleFonts.caveat(
+      headlineLarge: font.copyWith(
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: color,
       ),
-      headlineMedium: GoogleFonts.caveat(
+      headlineMedium: font.copyWith(
         fontSize: 28,
         fontWeight: FontWeight.w600,
         color: color,
       ),
-      headlineSmall: GoogleFonts.caveat(
+      headlineSmall: font.copyWith(
         fontSize: 24,
         fontWeight: FontWeight.w500,
         color: color,
       ),
-      titleLarge: GoogleFonts.caveat(
+      titleLarge: font.copyWith(
         fontSize: 22,
         fontWeight: FontWeight.w500,
         color: color,
       ),
-      titleMedium: GoogleFonts.caveat(
+      titleMedium: font.copyWith(
         fontSize: 18,
         fontWeight: FontWeight.w500,
         color: color,
       ),
-      titleSmall: GoogleFonts.caveat(
+      titleSmall: font.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w500,
         color: color,
       ),
-      bodyLarge: GoogleFonts.caveat(
+      bodyLarge: font.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.normal,
         letterSpacing: 0.5,
         height: 1.5,
         color: color,
       ),
-      bodyMedium: GoogleFonts.caveat(
+      bodyMedium: font.copyWith(
         fontSize: 14,
         fontWeight: FontWeight.normal,
         letterSpacing: 0.25,
         height: 1.4,
         color: color,
       ),
-      bodySmall: GoogleFonts.caveat(
+      bodySmall: font.copyWith(
         fontSize: 12,
         fontWeight: FontWeight.normal,
         letterSpacing: 0.4,
         height: 1.4,
         color: color.withValues(alpha: 0.7),
       ),
-      labelLarge: GoogleFonts.caveat(
+      labelLarge: font.copyWith(
         fontSize: 14,
         fontWeight: FontWeight.bold,
         letterSpacing: 1.25,
         color: color,
       ),
-      labelMedium: GoogleFonts.caveat(
+      labelMedium: font.copyWith(
         fontSize: 12,
         fontWeight: FontWeight.w600,
         letterSpacing: 1,
         color: color,
       ),
-      labelSmall: GoogleFonts.caveat(
+      labelSmall: font.copyWith(
         fontSize: 10,
         fontWeight: FontWeight.w400,
         letterSpacing: 1,
