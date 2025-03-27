@@ -1,42 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes_sphere_v116/models/task_model.dart';
 
 // Model Class for Task
-class Task {
-  String title;
-  bool isCompleted;
-  DateTime dateTime;
-
-  Task({
-    required this.title,
-    this.isCompleted = false,
-    required this.dateTime,
-  });
-}
 
 // Provider for Task Management
 class TodoProvider extends ChangeNotifier {
-  List<Task> tasks = [
-    Task(
-      title: "Buy Groceries",
-      isCompleted: false,
-      dateTime: DateTime.now().add(Duration(hours: 5)),
-    ),
-    Task(
-      title: "Do Homework",
-      isCompleted: true,
-      dateTime: DateTime.now().add(Duration(hours: 5)),
-    ),
-  ];
+  late Box<TaskModel> taskBox;
 
-  void toggleTaskStatus(Task task) {
-    int index =
-        tasks.indexOf(task); // 🔹 Find the correct index in the full list
+  List<TaskModel> get tasks => taskBox.values.toList();
+
+  TodoProvider() {
+    _initializeHive();
+  }
+
+  Future<void> _initializeHive() async {
+    taskBox = Hive.box<TaskModel>('tasksBox'); // Open Hive Box
+    notifyListeners(); // Update UI
+  }
+
+  void toggleTaskStatus(TaskModel task) {
+    int index = taskBox.values.toList().indexOf(task);
     if (index != -1) {
-      tasks[index] = Task(
-        title: tasks[index].title,
-        dateTime: tasks[index].dateTime,
-        isCompleted: !tasks[index].isCompleted, // Toggle status
-      );
+      task.isCompleted = !task.isCompleted;
+      task.save(); // Save changes to Hive
       notifyListeners();
     }
   }
@@ -45,15 +32,13 @@ class TodoProvider extends ChangeNotifier {
     required String title,
     required DateTime date,
   }) {
-    Task task = Task(
-      isCompleted: false,
-      title: title,
-      dateTime: date,
-    );
-    tasks.add(task);
+    final task = TaskModel(title: title, dateTime: date, isCompleted: false);
+    taskBox.add(task); // Add to Hive box
     notifyListeners();
   }
 
-  List<Task> get pendingTasks => tasks.where((t) => !t.isCompleted).toList();
-  List<Task> get completedTasks => tasks.where((t) => t.isCompleted).toList();
+  List<TaskModel> get pendingTasks =>
+      tasks.where((t) => !t.isCompleted).toList();
+  List<TaskModel> get completedTasks =>
+      tasks.where((t) => t.isCompleted).toList();
 }

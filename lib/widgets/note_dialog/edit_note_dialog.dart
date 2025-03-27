@@ -25,26 +25,35 @@ class EditNoteDialog extends StatelessWidget {
     final contentController = TextEditingController(text: note.content);
 
     return AlertDialog(
+      scrollable: true,
       title: const Text("Save Note"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            style: Theme.of(context).textTheme.headlineSmall,
-            controller: titleController,
-            decoration: const InputDecoration(labelText: "Title"),
-          ),
-          TextField(
-            style: Theme.of(context).textTheme.headlineLarge,
-            controller: categoryController,
-            decoration: const InputDecoration(labelText: "Category"),
-          ),
-          TextField(
-            style: Theme.of(context).textTheme.titleLarge,
-            controller: contentController,
-            decoration: const InputDecoration(labelText: "Content"),
-          ),
-        ],
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.95,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              style: Theme.of(context).textTheme.headlineSmall,
+              controller: titleController,
+              decoration: const InputDecoration(labelText: "Title"),
+            ),
+            TextField(
+              style: Theme.of(context).textTheme.headlineLarge,
+              controller: categoryController,
+              decoration: const InputDecoration(labelText: "Category"),
+            ),
+            TextField(
+              minLines: 10,
+              maxLines: 50,
+              style: Theme.of(context).textTheme.titleLarge,
+              controller: contentController,
+              decoration: const InputDecoration(
+                labelText: "Content",
+                alignLabelWithHint: true,
+              ),
+            ),
+          ],
+        ),
       ),
       actions: [
         TextButton(

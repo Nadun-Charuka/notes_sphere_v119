@@ -18,23 +18,32 @@ class AddNoteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      scrollable: true,
       title: Text("Add"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-              style: Theme.of(context).textTheme.headlineSmall,
-              controller: titleController,
-              decoration: InputDecoration(labelText: "Title")),
-          TextField(
-              style: Theme.of(context).textTheme.headlineLarge,
-              controller: categoryController,
-              decoration: InputDecoration(labelText: "Category")),
-          TextField(
-              style: Theme.of(context).textTheme.titleLarge,
-              controller: contentController,
-              decoration: InputDecoration(labelText: "Content")),
-        ],
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.95,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+                style: Theme.of(context).textTheme.headlineSmall,
+                controller: titleController,
+                decoration: InputDecoration(labelText: "Title")),
+            TextField(
+                style: Theme.of(context).textTheme.headlineLarge,
+                controller: categoryController,
+                decoration: InputDecoration(labelText: "Category")),
+            TextField(
+                minLines: 10,
+                maxLines: 50,
+                style: Theme.of(context).textTheme.titleLarge,
+                controller: contentController,
+                decoration: InputDecoration(
+                  labelText: "Content",
+                  alignLabelWithHint: true,
+                )),
+          ],
+        ),
       ),
       actions: [
         TextButton(

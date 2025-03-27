@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_sphere_v116/providers/note_Providers/note_provider.dart';
+import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/note_cards/notes_todo_card.dart';
@@ -75,10 +76,14 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     AppRouter.router.push("/todos");
                   },
-                  child: NotesTodoCard(
-                    title: "To-Do List",
-                    totalItems: "5 Tasks",
-                    icon: Icons.calendar_today,
+                  child: Selector<TodoProvider, int>(
+                    selector: (index, todoProvider) =>
+                        todoProvider.tasks.length,
+                    builder: (context, alltoDoLength, child) => NotesTodoCard(
+                      title: "To-Do",
+                      totalItems: "$alltoDoLength Tasks",
+                      icon: Icons.calendar_today,
+                    ),
                   ),
                 )
               ],

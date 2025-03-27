@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:notes_sphere_v116/models/task_model.dart';
 import 'package:notes_sphere_v116/providers/todo_providers/todo_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TodoProvider>(
       builder: (context, taskProvider, child) {
-        List<Task> tasks = isCompleted
+        List<TaskModel> tasks = isCompleted
             ? taskProvider.completedTasks
             : taskProvider.pendingTasks;
 
