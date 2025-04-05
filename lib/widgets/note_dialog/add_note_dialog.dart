@@ -60,7 +60,6 @@ class AddNoteDialog extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Title and Content cannot be empty.'),
-                  backgroundColor: Colors.red,
                 ),
               );
               return;

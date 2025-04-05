@@ -37,8 +37,17 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteTask(TaskModel task) {
+    int index = taskBox.values.toList().indexOf(task);
+    if (index != -1) {
+      taskBox.deleteAt(index); // Delete the task from Hive
+      notifyListeners(); // Update UI
+    }
+  }
+
   List<TaskModel> get pendingTasks =>
       tasks.where((t) => !t.isCompleted).toList();
+
   List<TaskModel> get completedTasks =>
       tasks.where((t) => t.isCompleted).toList();
 }

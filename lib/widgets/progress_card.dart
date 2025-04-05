@@ -13,16 +13,18 @@ class ProgressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int completedTask =
-        Provider.of<TodoProvider>(context, listen: false).completedTasks.length;
-    int totalTask =
-        Provider.of<TodoProvider>(context, listen: false).tasks.length;
+        Provider.of<TodoProvider>(context).completedTasks.length;
+    int totalTask = Provider.of<TodoProvider>(context).tasks.length;
 
     final progressProvider =
         Provider.of<ProgressProvider>(context, listen: false);
 
     // Update progress value whenever `completedTask` or `totalTask` changes
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      progressProvider.updateProgress(completedTask, totalTask);
+      progressProvider.updateProgress(
+        completedTask,
+        totalTask,
+      );
     });
 
     return Container(

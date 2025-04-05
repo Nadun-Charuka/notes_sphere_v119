@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/widgets/todo_dialog/add_todo_dialog.dart';
 import 'package:notes_sphere_v116/widgets/todo_cards/todo_task_list.dart';
 
@@ -48,11 +49,15 @@ class _TodoPageState extends State<TodoPage> with TickerProviderStateMixin {
             style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
-        body: TabBarView(
-          children: [
-            TaskList(isCompleted: false),
-            TaskList(isCompleted: true),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultPadding, vertical: 5),
+          child: TabBarView(
+            children: [
+              TaskList(isCompleted: false),
+              TaskList(isCompleted: true),
+            ],
+          ),
         ),
       ),
     );

@@ -18,6 +18,7 @@ class AppThemes {
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColorsDark.kFabColor,
         ),
+        snackBarTheme: SnackBarThemeData(backgroundColor: Colors.red),
         cardColor: AppColorsDark.kCardColor,
         textTheme: AppTextTheme.darkTextTheme(context),
       );
@@ -44,6 +45,7 @@ class AppThemes {
           backgroundColor: AppColorsLight.kFabColor,
           foregroundColor: Colors.white,
         ),
+        snackBarTheme: SnackBarThemeData(backgroundColor: Colors.red),
         cardColor: AppColorsLight.kCardColor,
         textTheme: AppTextTheme.lightTextTheme(context),
       );

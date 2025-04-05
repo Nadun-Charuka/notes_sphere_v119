@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:notes_sphere_v116/providers/font_provider.dart';
 import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/widgets/font_change_card.dart';
 import 'package:notes_sphere_v116/widgets/theme_icon_row_widget.dart';
-import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

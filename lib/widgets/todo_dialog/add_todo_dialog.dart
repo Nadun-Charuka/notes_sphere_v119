@@ -45,7 +45,6 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Please enter title and select date/time"),
-          backgroundColor: Colors.red,
         ),
       );
       return;
@@ -63,28 +62,34 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text("Add Task"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            style: Theme.of(context).textTheme.headlineLarge,
-            controller: _titleController,
-            decoration: InputDecoration(labelText: "Task"),
-          ),
-          SizedBox(height: 15),
-          TextField(
-            decoration: InputDecoration(
-              labelText: _selectedDateTime == null
-                  ? "Select Date & Time"
-                  : "${_selectedDateTime!.toLocal()}".split('.')[0],
-              labelStyle: Theme.of(context).textTheme.titleLarge,
-              suffixIcon: Icon(Icons.calendar_today),
-              border: OutlineInputBorder(),
+      content: SizedBox(
+        height: MediaQuery.of(context).size.width * 0.45,
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              minLines: 2,
+              maxLines: 5,
+              style: Theme.of(context).textTheme.headlineLarge,
+              controller: _titleController,
+              decoration: InputDecoration(labelText: "Task"),
             ),
-            readOnly: true,
-            onTap: _pickDateTime,
-          ),
-        ],
+            SizedBox(height: 15),
+            TextField(
+              decoration: InputDecoration(
+                labelText: _selectedDateTime == null
+                    ? "Select Date & Time"
+                    : "${_selectedDateTime!.toLocal()}".split('.')[0],
+                labelStyle: Theme.of(context).textTheme.titleLarge,
+                suffixIcon: Icon(Icons.calendar_today),
+                border: OutlineInputBorder(),
+              ),
+              readOnly: true,
+              onTap: _pickDateTime,
+            ),
+          ],
+        ),
       ),
       actions: [
         TextButton(

@@ -5,6 +5,7 @@ import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/note_cards/notes_todo_card.dart';
 import 'package:notes_sphere_v116/widgets/progress_card.dart';
+import 'package:notes_sphere_v116/widgets/todo_cards/todo_task_list.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -89,19 +90,27 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             kVerticalSpace20,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                Text(
-                  "Today's progress",
-                  style: Theme.of(context).textTheme.headlineLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Upcoming Tasks",
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    Text(
+                      "See All",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
                 ),
-                Text(
-                  "See All",
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: TaskList(isCompleted: false),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),
