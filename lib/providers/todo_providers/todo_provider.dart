@@ -50,4 +50,13 @@ class TodoProvider extends ChangeNotifier {
 
   List<TaskModel> get completedTasks =>
       tasks.where((t) => t.isCompleted).toList();
+
+  List<TaskModel> get upcomingTasks {
+    // Sort the pending tasks by dateTime (nearest first)
+    final sortedPending = [...pendingTasks]
+      ..sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+    // Take the first 5 upcoming tasks
+    return sortedPending.take(5).toList();
+  }
 }

@@ -71,7 +71,10 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
             TextField(
               minLines: 2,
               maxLines: 5,
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(fontWeight: FontWeight.w100),
               controller: _titleController,
               decoration: InputDecoration(labelText: "Task"),
             ),

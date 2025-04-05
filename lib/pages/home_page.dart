@@ -5,7 +5,7 @@ import 'package:notes_sphere_v116/utils/constants.dart';
 import 'package:notes_sphere_v116/utils/router.dart';
 import 'package:notes_sphere_v116/widgets/note_cards/notes_todo_card.dart';
 import 'package:notes_sphere_v116/widgets/progress_card.dart';
-import 'package:notes_sphere_v116/widgets/todo_cards/todo_task_list.dart';
+import 'package:notes_sphere_v116/widgets/todo_cards/homepage_todo_card.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -101,13 +101,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       "See All",
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),
+                kVerticalSpace10,
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: TaskList(isCompleted: false),
+                  child: HomepageTodoCard(),
                 )
               ],
             ),
