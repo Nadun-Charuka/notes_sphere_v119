@@ -52,13 +52,27 @@ class AddNoteDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
+            final title = titleController.text.trim();
+            final category = categoryController.text.trim();
+            final content = contentController.text.trim();
+
+            if (title.isEmpty || content.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Title and Content cannot be empty.'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+              return;
+            }
+
             final noteProvider =
                 Provider.of<NoteProvider>(context, listen: false);
             noteProvider.addNote(
               id,
-              titleController.text,
-              categoryController.text,
-              contentController.text,
+              title,
+              category,
+              content,
             );
             Navigator.pop(context);
           },

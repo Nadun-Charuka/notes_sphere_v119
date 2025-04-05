@@ -63,9 +63,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-/**
- * TextButton(
-              onPressed: () => fontProvider.setFont('Caveat'),
-              child: Text("Caveat", style: GoogleFonts.caveat()),
-            ),
- */

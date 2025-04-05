@@ -43,7 +43,10 @@ class _AddToDoDialogState extends State<AddToDoDialog> {
   void _addTask() {
     if (_titleController.text.isEmpty || _selectedDateTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please enter title and select date/time")),
+        SnackBar(
+          content: Text("Please enter title and select date/time"),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }

@@ -27,6 +27,7 @@ Future<void> main() async {
   //open hive boxes
   await Hive.openBox('notes');
   await Hive.openBox('todos');
+  await Hive.openBox("fonts");
   await Hive.openBox<TaskModel>('tasksBox');
 
   runApp(
